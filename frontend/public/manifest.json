@@ -1,0 +1,20 @@
+{
+  "short_name": "Tracker",
+  "name": "Expense Tracker",
+  "icons": [
+    {
+      "src": "FullLogo_Transparent.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "FullLogo_Transparent.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1E88E5",
+  "background_color": "#ffffff"
+}
