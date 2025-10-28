@@ -1,253 +1,349 @@
-# 💰 Expense Tracker
+# Expense Tracker
 
-A full-stack expense tracking application built with React, Node.js, Express, and MongoDB. Track expenses by category and receive email alerts when you exceed your budget.
+A full-stack application for tracking business expenses by category with automated budget alerts.
 
-## ⏱️ Time Spent
-Approximately 3.5 hours
+---
 
-## 🚀 Features
+## Technology Stack
 
-- ✅ Create and manage expense categories
-- ✅ Add expenses with amounts and descriptions
-- ✅ View total spending by category
-- ✅ Email notifications when budget limit is exceeded
-- ✅ Delete expenses
-- ✅ Real-time budget tracking
-- ✅ Clean, simple UI
+**Backend:** `Node.js`, `Express`, `MongoDB`, `Mongoose`  
+**Frontend:** `React`, `Axios`, `CSS3`  
+**Services:** `Brevo API` (email notifications)
 
-## 🛠️ Tech Stack
+---
 
-**Frontend:**
-- React 18
-- Axios for API calls
-- CSS3 for styling
+## Prerequisites
 
-**Backend:**
-- Node.js + Express
-- MongoDB with Mongoose
-- Brevo (Sendinblue) for email notifications
-
-## 📋 Prerequisites
-
-Before you begin, ensure you have:
-- Node.js (v14 or higher)
+- `Node.js` v14+
 - MongoDB Atlas account (free tier)
-- Brevo account (free tier) for email notifications
+- Brevo account (optional, for email alerts)
 
-## 🔧 Setup Instructions
+---
 
-### 1. Clone or Download the Project
-```bash
-mkdir expense-tracker
-cd expense-tracker
-```
+## Installation
 
-### 2. Set Up MongoDB
+### Backend Dependencies
 
-1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-2. Create a free account
-3. Create a new cluster (free tier)
-4. Click "Connect" → "Connect your application"
-5. Copy your connection string (it looks like: `mongodb+srv://username:password@cluster.mongodb.net/`)
-
-### 3. Set Up Brevo (Email Service)
-
-1. Go to [Brevo](https://www.brevo.com/)
-2. Create a free account
-3. Go to "SMTP & API" → "API Keys"
-4. Create a new API key and copy it
-5. Verify your sender email address in Brevo settings
-
-### 4. Backend Setup
 ```bash
 cd backend
 npm install
 ```
 
-Create a `.env` file in the `backend` folder:
+### Frontend Dependencies
+
+```bash
+cd frontend
+npm install
+```
+
+---
+
+## Configuration
+
+### Environment Variables
+
+Create `backend/.env` file:
+
 ```env
-MONGODB_URI=mongodb+srv://your-username:your-password@cluster.mongodb.net/expense-tracker
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/expense-tracker
 PORT=5000
-BREVO_API_KEY=your-brevo-api-key-here
-EMAIL_FROM=your-verified-email@example.com
+BREVO_API_KEY=your_api_key_here
+EMAIL_FROM=sender@example.com
 EMAIL_TO=recipient@example.com
 BUDGET_LIMIT=1000
 ```
 
-**Important:** Replace the placeholder values with your actual credentials.
+### MongoDB Setup
 
-Start the backend server:
+1. Create free cluster at `mongodb.com/cloud/atlas`
+2. Create database user with password
+3. Whitelist your IP address (or allow all: `0.0.0.0/0`)
+4. Get connection string and add to `.env`
+
+### Email Setup (Optional)
+
+1. Sign up at `brevo.com`
+2. Generate API key from `Settings > SMTP & API`
+3. Verify sender email address
+4. Add credentials to `.env`
+
+---
+
+## Running the Application
+
+### Start Backend Server
+
+**Terminal 1:**
+
 ```bash
+cd backend
 npm run dev
 ```
 
-You should see:
+Expected output:
+
 ```
-🚀 Server running on port 5000
-✅ Connected to MongoDB
+Server running on port 5000
+Connected to MongoDB
 ```
 
-### 5. Frontend Setup
+### Start Frontend Server
 
-Open a new terminal window:
+**Terminal 2:**
+
 ```bash
 cd frontend
-npm install
 npm start
 ```
 
-The app will open at `http://localhost:3000`
+Application runs at `http://localhost:3000`
 
-## 📱 How to Use
+---
 
-1. **Add Categories:**
-   - Enter a category name (e.g., "Food", "Transport", "Office Supplies")
-   - Click "Add Category"
+## Project Structure
 
-2. **Add Expenses:**
-   - Select a category from the dropdown
-   - Enter the amount (e.g., 25.50)
-   - Add a description (e.g., "Lunch at cafe")
-   - Click "Add Expense"
-
-3. **View Expenses:**
-   - Expenses are grouped by category
-   - See totals for each category
-   - View overall total spending
-
-4. **Budget Alerts:**
-   - When total expenses exceed $1000 (or your set limit)
-   - You'll see a warning banner in the app
-   - An email alert will be sent automatically
-
-5. **Delete Expenses:**
-   - Click the "Delete" button on any expense to remove it
-
-## 📁 Project Structure
 ```
 expense-tracker/
 ├── backend/
 │   ├── models/
-│   │   ├── Category.js          # Category data model
-│   │   └── Expense.js           # Expense data model
+│   │   ├── Category.js
+│   │   └── Expense.js
 │   ├── routes/
-│   │   ├── categories.js        # Category API endpoints
-│   │   └── expenses.js          # Expense API endpoints
+│   │   ├── categories.js
+│   │   └── expenses.js
 │   ├── services/
-│   │   └── emailService.js      # Email notification service
-│   ├── server.js                # Express server setup
-│   ├── .env                     # Environment variables (create this)
-│   ├── .env.example             # Example env file
+│   │   └── emailService.js
+│   ├── server.js
+│   ├── .env
 │   └── package.json
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── AddCategory.js   # Add category form
-│   │   │   ├── AddExpense.js    # Add expense form
-│   │   │   ├── CategoryList.js  # Display categories
-│   │   │   └── ExpenseList.js   # Display expenses
+│   │   │   ├── AddCategory.js
+│   │   │   ├── AddExpense.js
+│   │   │   ├── CategoryList.js
+│   │   │   └── ExpenseList.js
 │   │   ├── services/
-│   │   │   └── api.js           # API service layer
-│   │   ├── App.js               # Main app component
-│   │   ├── App.css              # Styling
-│   │   └── index.js             # React entry point
+│   │   │   └── api.js
+│   │   ├── App.js
+│   │   └── App.css
+│   ├── public/
 │   └── package.json
 └── README.md
 ```
 
-## 🔌 API Endpoints
+---
 
-### Categories
-- `GET /api/categories` - Get all categories
-- `POST /api/categories` - Create a category
-```json
-  { "name": "Food" }
+## API Documentation
+
+### Base URL
+
+```
+http://localhost:5000/api
 ```
 
-### Expenses
-- `GET /api/expenses` - Get all expenses
-- `POST /api/expenses` - Create an expense
+### Categories Endpoints
+
+#### Get All Categories
+
+**GET** `/api/categories`
+
+Response:
+
 ```json
-  {
-    "categoryId": "abc123",
-    "amount": 25.50,
-    "description": "Lunch"
+{
+  "ok": true,
+  "data": [
+    {
+      "_id": "507f1f77bcf86cd799439011",
+      "name": "Food",
+      "createdAt": "2024-10-28T10:30:00.000Z"
+    }
+  ]
+}
+```
+
+#### Create Category
+
+**POST** `/api/categories`
+
+Request:
+
+```json
+{
+  "name": "Transportation"
+}
+```
+
+Response:
+
+```json
+{
+  "ok": true,
+  "data": {
+    "_id": "507f1f77bcf86cd799439012",
+    "name": "Transportation",
+    "createdAt": "2024-10-28T10:35:00.000Z"
   }
+}
 ```
-- `DELETE /api/expenses/:id` - Delete an expense
 
-All responses follow the pattern:
+#### Delete Category
+
+**DELETE** `/api/categories/:id`
+
+Response:
+
 ```json
-{ "ok": true, "data": {...} }
-// or
-{ "ok": false, "error": "Error message" }
+{
+  "ok": true,
+  "data": {
+    "_id": "507f1f77bcf86cd799439012",
+    "name": "Transportation"
+  }
+}
 ```
 
-## 🎯 Design Decisions
+---
 
-1. **Flat Data Structure:** Categories and expenses are in separate collections with references, not nested. This makes queries simpler and follows MongoDB best practices.
+### Expenses Endpoints
 
-2. **Budget Alert Timing:** Email is sent immediately when an expense pushes the total over the limit. This provides instant notification.
+#### Get All Expenses
 
-3. **Email Service Choice:** Used Brevo because it has a generous free tier (300 emails/day) and a simple API.
+**GET** `/api/expenses`
 
-4. **Early Returns:** All route handlers use early returns for errors, making the code easier to read and maintain.
+Response:
 
-5. **Consistent API Responses:** All endpoints return `{ok, data}` or `{ok, error}` format for predictable frontend handling.
+```json
+{
+  "ok": true,
+  "data": [
+    {
+      "_id": "507f1f77bcf86cd799439013",
+      "categoryId": {
+        "_id": "507f1f77bcf86cd799439011",
+        "name": "Food"
+      },
+      "amount": 25.50,
+      "description": "Lunch meeting",
+      "createdAt": "2024-10-28T12:00:00.000Z"
+    }
+  ]
+}
+```
 
-## 🧪 Testing the Email Feature
+#### Create Expense
 
-To test the email notification:
+**POST** `/api/expenses`
 
-1. Set `BUDGET_LIMIT=50` in your `.env` file (lower amount for easy testing)
-2. Restart the backend server
-3. Add expenses totaling more than $50
-4. Check your email inbox for the alert
+Request:
 
-## 🐛 Troubleshooting
+```json
+{
+  "categoryId": "507f1f77bcf86cd799439011",
+  "amount": 45.00,
+  "description": "Office supplies"
+}
+```
 
-**MongoDB Connection Issues:**
-- Make sure your IP address is whitelisted in MongoDB Atlas
-- Check that your connection string is correct
-- Ensure your password doesn't contain special characters (or URL encode them)
+Response:
 
-**Email Not Sending:**
-- Verify your Brevo API key is correct
-- Check that your sender email is verified in Brevo
-- Look at the backend console for error messages
-- Make sure you're using a valid recipient email
+```json
+{
+  "ok": true,
+  "data": {
+    "_id": "507f1f77bcf86cd799439014",
+    "categoryId": {
+      "_id": "507f1f77bcf86cd799439011",
+      "name": "Food"
+    },
+    "amount": 45.00,
+    "description": "Office supplies",
+    "createdAt": "2024-10-28T14:20:00.000Z"
+  },
+  "budgetExceeded": false,
+  "emailSent": false
+}
+```
 
-**Frontend Can't Connect to Backend:**
-- Ensure backend is running on port 5000
-- Check that CORS is enabled in server.js
-- Verify the API_URL in `frontend/src/services/api.js`
+#### Delete Expense
 
-## 💡 Challenges Faced
+**DELETE** `/api/expenses/:id`
 
-1. **Email Service Integration:** Initially tested with different providers before settling on Brevo for its simple API and good free tier.
+Response:
 
-2. **Budget Alert Timing:** Decided to check budget on every expense creation rather than using a scheduled job, as it provides immediate feedback.
+```json
+{
+  "ok": true,
+  "data": {
+    "_id": "507f1f77bcf86cd799439014",
+    "amount": 45.00
+  }
+}
+```
 
-3. **Data Structure:** Chose to keep categories and expenses in separate collections for flexibility, even though it requires population on reads.
+---
 
-4. **State Management:** Kept it simple with useState rather than introducing Redux, as the app is small enough to manage state at the App level.
+### Error Response Format
 
-## 🔐 Security Notes
+All endpoints return errors in this format:
 
-- Never commit your `.env` file
-- Use environment variables for all sensitive data
-- The `.env.example` file shows required variables without exposing secrets
+```json
+{
+  "ok": false,
+  "error": "Error message describing the issue"
+}
+```
 
-## 📝 Future Improvements
+**HTTP Status Codes:**
 
-If I had more time, I would add:
-- Date range filtering for expenses
-- Edit expense functionality
-- Export expenses to CSV
-- Charts/graphs for spending visualization
-- Multiple budget limits per category
-- User authentication
+- `200` - Success
+- `201` - Resource created
+- `400` - Bad request (validation error)
+- `404` - Resource not found
+- `500` - Server error
 
-## 📄 License
+---
 
-This project is for educational purposes.
+## Features
+
+- Create and manage expense categories
+- Track expenses with amount, description, and category
+- View spending totals by category
+- Visual budget alerts when limit exceeded
+- Automated email notifications (if configured)
+- Delete expenses and categories
+- Real-time total expense calculation
+
+---
+
+## Design Decisions
+
+### Flat Data Structure
+
+Categories and expenses are stored in separate MongoDB collections rather than nested documents. This provides:
+
+- Better query performance for large datasets
+- Easier data manipulation and updates
+- Flexibility for future features
+- Alignment with MongoDB best practices
+
+### Early Return Pattern
+
+All route handlers use early returns for error conditions, reducing nesting and improving code readability.
+
+```javascript
+if (!name) return res.status(400).json({ ok: false, error: 'Name required' });
+```
+
+### Consistent API Response Format
+
+All endpoints return `{ok: boolean, data/error: any}` format for predictable error handling.
+
+### Budget Alert Implementation
+
+Budget checking occurs synchronously during expense creation, providing immediate feedback when thresholds are crossed.
+
+### Service Abstraction
+
+Email functionality is encapsulated in a dedicated service module, allowing for easy provider switching.
