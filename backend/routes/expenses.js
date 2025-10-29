@@ -3,7 +3,6 @@ const router = express.Router();
 const Expense = require('../models/Expense');
 const { sendBudgetAlert } = require('../services/emailService');
 
-// Get all expenses
 router.get('/', async (req, res) => {
   try {
     const expenses = await Expense.find().populate('categoryId').sort({ createdAt: -1 });
@@ -13,7 +12,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Create a new expense
 router.post('/', async (req, res) => {
   const { categoryId, amount, description } = req.body;
 
