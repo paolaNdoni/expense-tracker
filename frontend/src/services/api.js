@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://expense-tracker-backend-81s6.onrender.com';
+const API_URL = 'https://expense-tracker-backend-81s6.onrender.com/api'; 
 
 export const getCategories = async () => {
   const response = await axios.get(`${API_URL}/categories`);
