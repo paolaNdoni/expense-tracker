@@ -13,6 +13,42 @@ Full-stack expense tracking app with automated budget alerts.
 - **Frontend:** React, Axios
 - **Email:** Brevo API
 
+---
+
+## Project Structure
+
+```
+expense-tracker/
+├── backend/
+│   ├── models/
+│   │   ├── Category.js
+│   │   └── Expense.js
+│   ├── routes/
+│   │   ├── categories.js
+│   │   └── expenses.js
+│   ├── services/
+│   │   └── emailService.js
+│   ├── server.js
+│   ├── .env
+│   └── package.json
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── AddCategory.js
+│   │   │   ├── AddExpense.js
+│   │   │   ├── CategoryList.js
+│   │   │   └── ExpenseList.js
+│   │   ├── services/
+│   │   │   └── api.js
+│   │   ├── App.js
+│   │   └── App.css
+│   ├── public/
+│   └── package.json
+└── README.md
+```
+
+---
+
 ## Quick Start
 
 ### Backend
